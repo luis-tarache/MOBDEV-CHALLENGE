@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Menu from './components/Menu'
+import DogList from './components/DogList'
+import {useState, useEffect} from 'react'
+import axios from 'axios'
+import {Container} from '@mui/material'
 
-function App() {
+export default function App() { 
+
+  const [dogs, setDogs] = useState([])
+  const [selectedDogs, setSelectedDogs] = useState([])
+  
+
+  const fetchDogs = async () => {
+
+    try{
+
+    const result = await axios(
+      `https://dog.ceo/api/breeds/list/all`
+    )
+
+    setDogs(Object.entries(result.data.message))
+
+    }catch(err){
+      console.log('ERROR TYPE', err)
+  }
+    
+  }
+
+    useEffect(() => {
+
+      fetchDogs()
+
+  }, [])
+
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Container>
+    <Menu dogs = {dogs} 
+          setSelectedDogs = {setSelectedDogs}
+          selectedDogs = {selectedDogs}
+          />
+    <DogList dogs = {dogs}
+              selectedDogs = {selectedDogs}
+    />
+    </Container>
+  )
 }
 
-export default App;
