@@ -3,7 +3,7 @@ import {Container, Grid} from '@mui/material'
 
 export default function DogList({dogs, selectedDogs}) { 
 
-    let data = []
+    /*let data = []
 
     dogs.forEach(elem => {
 
@@ -17,7 +17,7 @@ export default function DogList({dogs, selectedDogs}) {
                 data.push(tempArr)
             })
         } 
-    })
+    })*/
 
     if (selectedDogs.length > 0) 
         return (
@@ -35,7 +35,7 @@ export default function DogList({dogs, selectedDogs}) {
             return (
                 <Container>
                 <Grid container spacing = {2}>
-                {data.map((dog) => (
+                {dogs.map((dog) => (
                 <Grid key= {dog} item xs={12} sm={6} md={4} lg={3}>
                 <Dog dog = {dog}/>
                 </Grid>

@@ -6,7 +6,7 @@ export default function Menu({dogs, selectedDogs, setSelectedDogs}) {
 
     let selectedVal = []
 
-    const data = []
+    /*const data = []
 
     dogs.forEach(elem => {
 
@@ -20,7 +20,7 @@ export default function Menu({dogs, selectedDogs, setSelectedDogs}) {
                 data.push(tempArr)
             })
         } 
-    })
+    })*/
 
 
   return (
@@ -37,7 +37,7 @@ export default function Menu({dogs, selectedDogs, setSelectedDogs}) {
             selectedVal.push(e)
             setSelectedDogs(selectedVal)
         }}
-        options={data} 
+        options={dogs} 
         placeholder="Select a Breed"
         style={{
             searchBox: {

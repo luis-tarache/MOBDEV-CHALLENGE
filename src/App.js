@@ -9,7 +9,28 @@ export default function App() {
 
   const [dogs, setDogs] = useState([])
   const [selectedDogs, setSelectedDogs] = useState([])
-  
+
+  const settingDogs = (fetchedData) => {
+
+    let data = []
+    const tempData = Object.entries(fetchedData.data.message)
+
+    tempData.forEach(elem => {
+
+        if (elem[1].length === 0) {
+            data.push(elem[0])
+        }
+        
+        if (elem[1]) {
+            elem[1].forEach(el => {
+                let tempArr = [elem[0], el].join('/')
+                data.push(tempArr)
+            })
+        } 
+    })
+
+    return data
+  }  
 
   const fetchDogs = async () => {
 
@@ -19,7 +40,9 @@ export default function App() {
       `https://dog.ceo/api/breeds/list/all`
     )
 
-    setDogs(Object.entries(result.data.message))
+    setDogs(settingDogs(result))
+
+    //setDogs(Object.entries(result.data.message))
 
     }catch(err){
       console.log('ERROR TYPE', err)
